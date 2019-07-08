@@ -30,7 +30,7 @@ echo "aa1\naa2\naa3" | java SqlLog "select 'aa(\d)' 'find para #1=#{1}' from pip
 
 # 完整语法示例
 
-select 'regx with group like (\d) ' 'format string like ${1} or group function count(${1})'
+select 'regx with group like (\d) ' 'format string like #{1} or group function count(#{1})'
 
 from pipe|filename1,filename2
 
@@ -59,6 +59,10 @@ limit 10,20
 -preLimit=10,5 : 过滤掉前5行输入,然后只处理随后5行输入,这个过滤在一切过滤条件之前
 
 # 其他说明
+
+in path 有2种情况:1本地路径为local://local/path,其中local://local为固定前缀,/path为本地绝对路径.2远程路径为ssh://host/path, 其中host为域名或者ip,/path为远程绝对路径.对于远程路径,是使用ssh host "cmd" 命令实现的,因此需要配置免密码登陆.
+
+一个sql只允许一种文件访问方式,不能一个path是远程,一个path是本地
 
 可以使用select * ,select count(*)
 
